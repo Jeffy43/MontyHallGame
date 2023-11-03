@@ -44,8 +44,5 @@ public class MontyHall {
             } else {
                 other = "gate 2";
             }
-        }else {
-
         }
-    }
 }
