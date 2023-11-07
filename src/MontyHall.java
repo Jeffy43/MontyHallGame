@@ -40,15 +40,6 @@ public class MontyHall{
             this.guess = "door 3";
             this.behindguess = door3;
             reveal3 = true;
-
-        }
-    }
-
-    public MontyHall(String swap){
-        if(swap.equals("Yes")){
-            this.swap = true;
-        }else{
-            this.swap = false;
         }
     }
 
@@ -70,7 +61,7 @@ public class MontyHall{
             other2 = "door 3";
         }
 
-        if (guess.equals("Car")) {
+        if (behindguess.equals("Car")) {
             if (a > 0) {
                 statement = "The other goat is in " + other;
                 if(other.equals("door 1")){
@@ -87,47 +78,53 @@ public class MontyHall{
                 }
             }
         } else {
-            if (guess.equals("door1") && door2.equals("Goat")) {
+            if (guess.equals("door 1") && door2.equals("Goat")) {
                 statement = "The other goat is in door 2.";
-            } else if (guess.equals("door1") && door3.equals("Goat")) {
+            } else if (guess.equals("door 1") && door3.equals("Goat")) {
                 statement = "The other goat is in door 3.";
-            } else if (guess.equals("door2") && door3.equals("Goat")) {
+            } else if (guess.equals("door 2") && door3.equals("Goat")) {
                 statement = "The other goat is in door 3.";
-            }else if (guess.equals("door2") && door1.equals("Goat")) {
+            }else if (guess.equals("door 2") && door1.equals("Goat")) {
                 statement = "The other goat is in door 1.";
-            }else if (guess.equals("door3") && door1.equals("Goat")) {
+            }else if (guess.equals("door 3") && door1.equals("Goat")) {
                 statement = "The other goat is in door 1.";
             }else{
                 statement = "The other goat is in door 2.";
             }
         }
-        return statement;
+        return statement + door1 + door2 + door3;
+    }
+
+    public MontyHall(String swap){
+        if(swap.equals("Yes")){
+            this.swap = true;
+        }else{
+            this.swap = false;
+        }
     }
 
     public void swap(){
         if(swap){
             if(guess.equals("door 1")){
                 if(reveal2){
-                    this.guess = "door 3";
+                    guess = "door 3";
                 }else{
-                    this.guess = "door 2";
+                    guess = "door 2";
                 }
-            }
-            if(guess.equals("door 2")){
+            }else if(guess.equals("door 2")){
                 if(reveal3){
-                    this.guess = "door 1";
+                    guess = "door 1";
                 }else{
-                    this.guess = "door 3";
+                    guess = "door 3";
                 }
-            }
-            if(guess.equals("door 3")){
+            }else{
                 if(reveal1){
-                    this.guess = "door 2";
+                    guess = "door 2";
                 }else{
-                    this.guess = "door 1";
+                    guess = "door 1";
                 }
             }
         }
-        System.out.println(this.guess);
     }
 }
+
