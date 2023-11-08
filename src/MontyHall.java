@@ -1,4 +1,5 @@
 public class MontyHall{
+    //private variables
     private String guess;
     private String behindguess;
     private String door1 = "";
@@ -29,7 +30,7 @@ public class MontyHall{
             winDoor = "door 3";
         }
     }
-    //assigns guess to what is behind the door they chose
+    //assigns guess to what is behind the door they chose, assigns what is behind guessed door, assigns the guessed door as revealed
     public MontyHall(int guess){
         if (guess == 1) {
             this.guess = "door 1";
@@ -45,7 +46,7 @@ public class MontyHall{
             reveal3 = true;
         }
     }
-
+    //returns random door with goat if guessed winning door, returns other goat if guessed door with goat
     public String otherGoat() {
         int a = (int) (Math.random() * 2);
         String statement = "";
@@ -101,10 +102,10 @@ public class MontyHall{
                 reveal2 = true;
             }
         }
-        return statement + door1 + door2 + door3;
+        return statement;
     }
 
-
+    //swaps guess to unrevealed door
     public void swap(){
         if(guess.equals("door 1")){
                 if(reveal2){
@@ -132,7 +133,7 @@ public class MontyHall{
                 }
             }
         }
-
+        //lets you know if you've won
         public String decision(){
             if(winDoor.equals(guess)){
                 return "You won the car!";
