@@ -9,17 +9,15 @@ public class MontyHallRunner {
         System.out.println("There are two goats and a car randomly behind door 1, 2, and 3.");
         System.out.println("Where do you think the car is? Enter 1, 2, or 3: ");
         int guess = scan.nextInt();
-
-        // Consume the newline character
         scan.nextLine();
-
         MontyHall game = new MontyHall(guess);
         game.generate();
         System.out.println(game.otherGoat());
         System.out.println("Do you want to switch your guess? Yes or No: ");
         String swap = scan.nextLine();
-        MontyHall game2 = new MontyHall(swap);
-        game2.swap();
-
+        if(swap.equals("Yes")){
+            game.swap();
+        }
+        System.out.println(game.decision());
     }
 }

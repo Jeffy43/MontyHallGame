@@ -4,6 +4,7 @@ public class MontyHall{
     private String door1 = "";
     private String door2 = "";
     private String door3 = "";
+    private String winDoor;
     boolean reveal1;
     boolean reveal2;
     boolean reveal3;
@@ -13,16 +14,19 @@ public class MontyHall{
         int a = (int) (Math.random() * 3);
         if (a == 0) {
             door1 = "Car";
+            winDoor = "door 1";
             door2 = "Goat";
             door3 = "Goat";
         } else if (a == 1) {
             door1 = "Goat";
             door2 = "Car";
+            winDoor = "door 2";
             door3 = "Goat";
         } else {
             door1 = "Goat";
             door2 = "Goat";
             door3 = "Car";
+            winDoor = "door 3";
         }
     }
     //assigns guess to what is behind the door they chose
@@ -35,7 +39,6 @@ public class MontyHall{
             this.guess = "door 2";
             this.behindguess = door2;
             reveal2 = true;
-
         } else {
             this.guess = "door 3";
             this.behindguess = door3;
@@ -63,14 +66,14 @@ public class MontyHall{
 
         if (behindguess.equals("Car")) {
             if (a > 0) {
-                statement = "The other goat is in " + other;
+                statement = "The other goat is in " + other2;
                 if(other.equals("door 1")){
                     reveal1 = true;
                 }else{
                     reveal2 = true;
                 }
             } else {
-                statement = "The other goat is in " + other2;
+                statement = "The other goat is in " + other;
                 if(other2.equals("door 2")){
                     reveal2 = true;
                 }else{
@@ -80,51 +83,63 @@ public class MontyHall{
         } else {
             if (guess.equals("door 1") && door2.equals("Goat")) {
                 statement = "The other goat is in door 2.";
+                reveal2 = true;
             } else if (guess.equals("door 1") && door3.equals("Goat")) {
                 statement = "The other goat is in door 3.";
+                reveal3 = true;
             } else if (guess.equals("door 2") && door3.equals("Goat")) {
                 statement = "The other goat is in door 3.";
+                reveal3 = true;
             }else if (guess.equals("door 2") && door1.equals("Goat")) {
                 statement = "The other goat is in door 1.";
+                reveal1 = true;
             }else if (guess.equals("door 3") && door1.equals("Goat")) {
                 statement = "The other goat is in door 1.";
+                reveal1 = true;
             }else{
                 statement = "The other goat is in door 2.";
+                reveal2 = true;
             }
         }
         return statement + door1 + door2 + door3;
     }
 
-    public MontyHall(String swap){
-        if(swap.equals("Yes")){
-            this.swap = true;
-        }else{
-            this.swap = false;
-        }
-    }
 
     public void swap(){
-        if(swap){
-            if(guess.equals("door 1")){
+        if(guess.equals("door 1")){
                 if(reveal2){
                     guess = "door 3";
+                    System.out.println("Guess switched from 1 to 3.");
                 }else{
                     guess = "door 2";
+                    System.out.println("Guess switched from 1 to 2.");
                 }
             }else if(guess.equals("door 2")){
                 if(reveal3){
                     guess = "door 1";
+                    System.out.println("Guess switched from 2 to 1.");
                 }else{
                     guess = "door 3";
+                    System.out.println("Guess switched from 2 to 3.");
                 }
             }else{
                 if(reveal1){
                     guess = "door 2";
+                    System.out.println("Guess switched from 3 to 2.");
                 }else{
                     guess = "door 1";
+                    System.out.println("Guess switched from 3 to 1.");
                 }
             }
         }
+
+        public String decision(){
+            if(winDoor.equals(guess)){
+                return "You won the car!";
+            }else{
+                return "The car is behind " + winDoor + ". You lost! (Or you could say you won a goat!)" + behindguess;
+            }
+        }
     }
-}
+
 
